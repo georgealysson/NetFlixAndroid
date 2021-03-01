@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.netflixremake.model.Movie;
@@ -30,20 +31,20 @@ public class MainActivity extends AppCompatActivity {
         List<Movie> movies = new ArrayList<>( );
         for (int i = 0; i < 30 ; i++){
             Movie movie = new Movie();
-            movie.setCoverUrl("abc" + i);
+            movie.setCoverUrl(R.drawable.movie);
             movies.add(movie);
         }
         mainAdapter = new MainAdapter(movies);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL, false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
         recyclerView.setAdapter(mainAdapter);
     }
     private static class MovieHolder extends RecyclerView.ViewHolder{
 
-        final TextView textViewUrl;
+        final ImageView imageViewCover;
 
         public MovieHolder(@NonNull View itemView) {
             super(itemView);
-            textViewUrl = itemView.findViewById(R.id.text_view_url);
+            imageViewCover = itemView.findViewById(R.id.image_view_cover);
         }
     }
     private class MainAdapter extends RecyclerView.Adapter<MovieHolder>{
@@ -62,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull MovieHolder holder, int position) {
             Movie movie = movies.get(position);
-            holder.textViewUrl.setText(movie.getCoverUrl());
+            holder.imageViewCover.setImageResource(movie.getCoverUrl());
         }
 
         @Override
